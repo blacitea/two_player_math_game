@@ -5,7 +5,15 @@ class Question
     @number2 = rand(20)
     @active_player = active_player
     @question = "#{@active_player}: What does #{@number1} plus #{@number2} equal?"
-    @answer = @number1 + @number2
+    @correct_answer = @number1 + @number2
+  end
+
+  def question
+    @question
+  end
+
+  def is_correct?(user_answer)
+    user_answer == @correct_answer
   end
 
 end
