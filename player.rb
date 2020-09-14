@@ -8,11 +8,7 @@ class Player
   end
 
   def subtract_lives
-    if lives >= 1
-      @lives_count -= 1
-    else
-      "Player is dead? " + dead?.to_s
-    end
+    lives >= 1 ? @lives_count -= 1 : "Player is dead."
   end
 
   def dead?
