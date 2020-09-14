@@ -22,12 +22,7 @@ class Game
   def turn
     question = Question.new(@active_player)
     question.ask
-    if question.is_correct? == true
-      puts "#{@active_player.name}: YES! You are correct."
-    else
-      puts "#{@active_player.name}: Seriously? NO!"
-      @active_player.subtract_lives
-    end
+    question.check_answer
     puts "P1: #{p1.lives} vs P2: #{p2.lives}"
   end
 
@@ -37,7 +32,6 @@ class Game
 
   def winner
     winner = @player_list.find {|player| player.alive?}
-    puts ""
     puts "#{winner.name} wins with a score of #{winner.lives}"
   end
 
