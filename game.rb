@@ -3,9 +3,9 @@ require_relative 'question.rb'
 class Game
   attr_reader :p1, :p2
   def initialize
-    #@active_player = @player_list[0]
     @p1 = Player.new("Player 1")
     @p2 = Player.new("Player 2")
+    # @player_list = [Player.new("Player 1"), Player.new("Player 2")] # [Player1={Player1: Player.new}]
     @player_list = [p1, p2]
     @active_player = p1
   end
