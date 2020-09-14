@@ -10,43 +10,46 @@ class Game
     @active_player = p1
   end
 
-  def new_turn
-    if @active_player == p1
-      @active_player = p2
-    else
-      @active_player = p1
-    end
-    puts "-----NEW TURN-----"
-  end
-
   def turn
-    question = Question.new(@active_player)
-    question.ask
-    question.check_answer
+    question = Question.new
+
+    puts "#{@active_player.name}: What does #{question.number1} plus #{question.number2} equal?"
+    print "> "
+    player_answer = $stdin.gets.chomp.to_i
+
+    if player_answer == question.correct_answer
+      puts "#{@active_player.name}: YES! You are correct."
+    else
+      puts "#{@active_player.name}: Seriously? NO!"
+      @active_player.subtract_lives
+    end
+
     puts "P1: #{p1.lives} vs P2: #{p2.lives}"
+
   end
 
-  def next?
+  def new_turn
+    @active_player == p1 ? @active_player = p2 : @active_player = p1
+    puts "-----NEW TURN-----"
+    turn
+  end
+
+  def continue?
     p1.alive? && p2.alive?
   end
 
-  def winner
+  def game_over
     winner = @player_list.find {|player| player.alive?}
     puts "#{winner.name} wins with a score of #{winner.lives}"
-  end
-
-  def game_over
     puts "-----GAME OVER-----"
     puts "Good bye!"
   end
 
   def start_game
     turn
-    while next?
+    while continue?
       new_turn
-      turn
     end
-    winner
     game_over
   end
 
