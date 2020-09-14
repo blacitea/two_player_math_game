@@ -15,9 +15,9 @@ The game doesn’t end until one of the players loses all their lives. At this p
 
 ### Step 2 - Write their roles
 
-- Players (name)
+- Players
 
-  - state : lives counter, player name
+  - state : lives counter
   - methods
     - Public : read lives counter, subtract from lives counter, dead?
 
@@ -27,15 +27,9 @@ The game doesn’t end until one of the players loses all their lives. At this p
   - methods : create and store question, store answer, verify answer (take user I/O)
     - Public : ask_question, is_correct?
 
-- User
-
-  - state : player_list
-  - methods
-    - Public : add_player(take user I/O), active_player - Maybe rotate player_list[0]??
-
 - Game
 
-  - state : users
-  - methods
+  - state : player_list [{player_1}, {player_2}], active_player
+    - methods
     - Public : start game
-    - Private : gameEnd?, start new round, announce player status, announce winner, end game
+    - Private : gameEnd?, start new round?? change active_player , ask q, do update , announce player status, announce winner, end game
