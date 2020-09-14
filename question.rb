@@ -10,6 +10,7 @@ class Question
 
   def ask
     puts "#{@active_player}: What does #{@number1} plus #{@number2} equal?"
+    print "> "
     @player_answer = $stdin.gets.chomp.to_i
   end
 
