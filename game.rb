@@ -1,16 +1,16 @@
 require_relative 'player.rb'
 require_relative 'question.rb'
 class Game
-  attr_reader :p1, :p2
+
   def initialize
     @p1 = Player.new("Player 1")
     @p2 = Player.new("Player 2")
-    # @player_list = [Player.new("Player 1"), Player.new("Player 2")] # [Player1={Player1: Player.new}]
-    @player_list = [p1, p2]
-    @active_player = p1
+    @player_list = [@p1, @p2]
+    @active_player
   end
 
   def turn
+    @active_player = @player_list[0]
     question = Question.new
 
     puts "#{@active_player.name}: What does #{question.number1} plus #{question.number2} equal?"
@@ -24,18 +24,19 @@ class Game
       @active_player.subtract_lives
     end
 
-    puts "P1: #{p1.lives} vs P2: #{p2.lives}"
+    puts "P1: #{@p1.lives} vs P2: #{@p2.lives}"
 
   end
 
   def new_turn
-    @active_player == p1 ? @active_player = p2 : @active_player = p1
+    @player_list.rotate!
+    p @player_list
     puts "-----NEW TURN-----"
     turn
   end
 
   def continue?
-    p1.alive? && p2.alive?
+    @p1.alive? && @p2.alive?
   end
 
   def game_over
